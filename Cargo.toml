@@ -1,0 +1,28 @@
+[package]
+name = "h264_422_10bit"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.92"
+description = "Decode-only, analysis-focused H.264/AVC 4:2:2 10-bit decoder in Rust."
+authors = ["Jonn Sandon <jonn42@gmail.com>"]
+license = "MIT"
+repository = "https://github.com/JonnSandon/h264_422_10bit"
+keywords = ["h264", "avc", "video", "decoder", "analysis"]
+categories = ["multimedia", "parsing"]
+
+[dependencies]
+bitstream-io = "1"
+bitvec = "1"
+thiserror = "1"
+log = "0.4"
+
+[dev-dependencies]
+env_logger = "0.11"
+criterion = "0.5"
+
+[lib]
+bench = false
+
+[[bench]]
+name = "bitstream_bench"
+harness = false
