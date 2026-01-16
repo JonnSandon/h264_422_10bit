@@ -3,6 +3,7 @@ use std::collections::HashMap;
 use crate::error::H264Error;
 use crate::nal::{self, NalUnitType};
 use crate::sps_pps::{PictureParameterSet, SequenceParameterSet};
+use crate::yuv::Yuv422p10;
 
 #[derive(Debug, Clone)]
 pub struct DecodedFrame {
@@ -10,8 +11,12 @@ pub struct DecodedFrame {
     pub height: u32,
     pub is_field: bool,
     pub is_idr: bool,
-    // TODO: YUV planes, timestamps, etc.
+
+    /// Actual pixel data
+    pub yuv: Yuv422p10,
 }
+
+
 
 pub struct H264Decoder {
     sps_map: HashMap<u32, SequenceParameterSet>,
@@ -47,6 +52,7 @@ impl H264Decoder {
                         height: 1080,
                         is_field: false,
                         is_idr: nal.nal_unit_type == NalUnitType::CodedSliceIdr,
+                        yuv: Yuv422p10::new(1920, 1080, 10),
                     };
                     frames.push(frame);
                 }
