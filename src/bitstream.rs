@@ -1,4 +1,6 @@
 use bitstream_io::{BigEndian, BitReader};
+use bitstream_io::BitRead;
+
 use std::io::Cursor;
 
 pub struct Bitstream<'a> {
